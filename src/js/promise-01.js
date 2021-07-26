@@ -3,12 +3,14 @@
 // Значением исполнившегося промиса должно быть то кол-во миллисекунд
 // которое передали во время вызова функции delay.
 
+// Task 1
 const delay = ms => {
-  return new Promise(resolve => {
+  const promise = new Promise(resolve =>
     setTimeout(() => {
-      resolve(ms);
-    }, ms);
-  });
+      resolve(`${ms}`);
+    }, ms),
+  );
+  return promise;
 };
 
 const logger = time => console.log(`Resolved after ${time}ms`);

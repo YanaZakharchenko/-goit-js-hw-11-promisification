@@ -1,21 +1,23 @@
 // Перепиши функцию toggleUserState() так, чтобы она не использовала callback-функцию callback, 
 // а принимала всего два параметра allUsers и userName и возвращала промис.
 
+// /Task 2
+
 const users = [
   { name: 'Mango', active: true },
   { name: 'Poly', active: false },
-  { name: 'Ajax', active: true },
-  { name: 'Lux', active: false },
+  { name: 'Ajax', active: false },
 ];
 
-const toggleUserState = (allUsers, userName) => {
-  return Promise.all (
-    allUsers.map(user =>
-      user.name === userName ? { ...user, active: !user.active } : user,)
-  )
-  };
+const toggleUserState = (allUsers, username) => {
+  const promise = new Promise(resolve => {
+    resolve(
+      allUsers.map(user => (user.name === username ? { ...user, active: !user.active } : user)),
+    );
+  });
 
-const logger = updatedUsers => console.table(updatedUsers);
+  return promise;
+};
 
-toggleUserState(users, 'Mango').then(logger);
-toggleUserState(users, 'Lux').then(logger);
+toggleUserState(users, 'Mango').then(console.table);
+toggleUserState(users, 'Ajax').then(console.table);
